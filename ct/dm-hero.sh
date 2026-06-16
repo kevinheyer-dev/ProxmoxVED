@@ -6,8 +6,8 @@ source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxV
 # Source: https://github.com/Flo0806/dm-hero
 
 # Variablen gemäß offiziellem Styleguide komplett in Kleinbuchstaben
-app="dm-hero"
-var_tags="${var_tags:-automation;shopping}"
+APP="dm-hero"
+var_tags="${var_tags:-games;campaign-management}"
 var_cpu="${var_cpu:-1}"
 var_ram="${var_ram:-1024}"          
 var_disk="${var_disk:-4}"           
@@ -17,7 +17,7 @@ var_arm64="${var_arm64:-no}"
 var_unprivileged="${var_unprivileged:-1}"
 
 # Framework initialisieren
-header_info "${app}"
+header_info "${APP}"
 variables
 color
 catch_errors
@@ -28,11 +28,11 @@ function update_script() {
   check_container_resources
 
   if [[ ! -d /opt/dm-hero ]]; then
-    msg_error "No ${app} Installation Found!"
+    msg_error "No ${APP} Installation Found!"
     exit
   fi
 
-  msg_info "Updating ${app} via Git"
+  msg_info "Updating ${APP} via Git"
   cd /opt/dm-hero || msg_error "Failed to change directory to /opt/dm-hero"
   
   git stash &>/dev/null || true
@@ -56,6 +56,6 @@ build_container
 description
 
 msg_ok "Completed Successfully!\n"
-echo -e "${CREATING}${GN}${app} setup has been successfully initialized!${CL}"
+echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW}Access it using the following URL:${CL}"
 echo -e "${GATEWAY}${BGN}http://${IP}:3000${CL}"
